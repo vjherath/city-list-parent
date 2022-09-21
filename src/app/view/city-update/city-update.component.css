@@ -1,0 +1,15 @@
+.content{
+    width: 662px;
+    height: 300px;
+}
+
+.search-form {
+    padding-left: 2px;
+    padding-top: 8px;
+  }
+
+  .city-img{
+    width: 200px;
+    position: relative;
+    left: 35%;
+  }

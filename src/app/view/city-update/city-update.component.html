@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Edit City</h2>
+<mat-dialog-content class="content">
+    <form class="search-form">
+        <mat-form-field style="width: 100%">
+          <mat-label>City Name</mat-label>
+          <input type="text" matInput  [(ngModel)]="name"  name="city">
+        </mat-form-field>
+      </form>
+      
+      <p>Change City Image</p>
+        <input type="file" class="file-upload" accept="image/png, image/jpeg" name="img" 
+        (change)="changeImage($event)">
+      <div>
+        <img class="city-img"  [src]="photoUrl | safeUrl">
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions style="text-align: right;display: block;">
+  <button mat-button color="primary" mat-dialog-close>Cancel</button>
+  <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="updateCity()">Update</button>
+</mat-dialog-actions>
+

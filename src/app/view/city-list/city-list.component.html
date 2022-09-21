@@ -1,0 +1,60 @@
+<div class="top-toolbar" role="banner">
+    <div class="spacer">
+        City List
+    </div>
+    <button mat-icon-button class="logout-btn" matTooltip="LogOut" [matTooltipPosition]="'left'"
+                    (click)="userLogout()" >
+                        <mat-icon>power_settings_new</mat-icon>
+                      </button> 
+</div>
+<div class="toolbar">
+    <div>
+        <form class="search-form">
+            <mat-form-field class="search-text">
+              <mat-label>Search</mat-label>
+              <input type="text" matInput (disabled)="loading" (ngModelChange)="searchByName($event)" [(ngModel)]="searchText"  name="city"
+                     placeholder="Search by name">
+            </mat-form-field>
+          </form>
+    </div>
+</div>
+
+<mat-progress-bar mode="indeterminate" class="progress" *ngIf="loading"></mat-progress-bar>
+
+<div class="container-fluid">
+    <div class="row my-3">
+      <div class="col-12 mt-3 text-center" >
+        <mat-accordion class="city-list" *ngIf="cityList.length">
+            <mat-expansion-panel class="city-list-item" *ngFor="let city of cityList">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{city.name | titlecase}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                    <img class="city-img" [src]="city.photoUrl | safeUrl">
+                </div>
+                <mat-action-row style="height: 10px;">
+                    <button mat-icon-button class="edit-btn" matTooltip="Edit" [matTooltipPosition]="'left'"
+                    (click)="editCity(city)" [disabled] = "!admin">
+                        <mat-icon>edit</mat-icon>
+                      </button> 
+                  </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <p *ngIf="!loading && !cityList.length" class="not-found-msg">Result not found!</p>
+      </div>
+    </div>
+</div>
+<div class="paginator" *ngIf="cityList.length">
+    <mat-paginator [disabled] ="loading" [length]="totalElements"
+              [pageSize]="size"
+              [pageIndex]="page"
+              [pageSizeOptions]="[10, 20, 50]"
+              aria-label="Select page" (page)="changePage($event)">
+        </mat-paginator>
+</div>
+
+    
